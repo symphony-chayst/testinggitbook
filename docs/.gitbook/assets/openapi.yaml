@@ -26,7 +26,7 @@ info:
     Stream and Read Messages/Events Stream. Unless otherwise specified,
     all events were added in 1.46.
 
-host:'youragentURL.symphony.com'
+host:youragentURL.symphony.com
 basePaths:
   '/v4/datafeed/create':
     post:
