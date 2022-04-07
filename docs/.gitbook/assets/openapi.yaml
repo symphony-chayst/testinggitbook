@@ -216,7 +216,7 @@ paths:
           required: true
           type: array
           schema:
-            $ref: '#/definitions/V4MessageImport'
+            $ref: '#/definitions/V4ImportedMessage'
       tags:
         - Messages
       responses:
