@@ -27,7 +27,7 @@ info:
     all events were added in 1.46.
 
 host: 'youragentURL.symphony.com'
-basePath: ''
+basePath: '/agent'
 paths:
   '/v4/datafeed/create':
     post:
