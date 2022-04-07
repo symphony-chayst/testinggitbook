@@ -213,10 +213,10 @@ paths:
           type: string
         - name: body
           in: body
-          required: true
+          required: false
           type: array
-          schema:
-            $ref: '#/definitions/V4MessageImportList'
+          items:
+            $ref: '#/definitions/V4ImportedMessage'
       tags:
         - Messages
       responses:
