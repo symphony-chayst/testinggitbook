@@ -17,7 +17,7 @@ info:
     and the response code will be 50X.
 
 host: 'yourpodURL.symphony.com'
-basePath: 'pod'
+basePath: '/pod'
 paths:
   '/v1/companycert/list':
     get:
