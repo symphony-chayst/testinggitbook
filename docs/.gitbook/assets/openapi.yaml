@@ -216,6 +216,10 @@ paths:
           required: false
           schema:
             $ref: '#/definitions/V4MessageImportList'
+        - name: other
+          in: body
+          required: true
+          type: string
       tags:
         - Messages
       responses:
