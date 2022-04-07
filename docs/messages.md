@@ -34,10 +34,17 @@
 
 Hello this is Thibault
 
-## Header
+## Pod endpoint
+
+{% swagger src=".gitbook/assets/podv2.yml" path="/v1/admin/messagesuppression/{id}/suppress" method="post" %}
+[podv2.yml](.gitbook/assets/podv2.yml)
+{% endswagger %}
 
 ```
-// Some code
+<messageML>
+  This is a messageML test
+  <form>form</form>
+</messageML>
 ```
 ### Header 2
 ```
