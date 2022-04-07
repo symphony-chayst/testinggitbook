@@ -26,7 +26,8 @@ info:
     Stream and Read Messages/Events Stream. Unless otherwise specified,
     all events were added in 1.46.
 
-paths:
+host:'youragentURL.symphony.com'
+basePaths:
   '/v4/datafeed/create':
     post:
       summary: Create a new real time message event stream.
