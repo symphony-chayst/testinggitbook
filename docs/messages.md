@@ -39,3 +39,7 @@ Hello this is Thibault
 ```
 // Some code
 ```
+### Header 2
+```
+// Some code
+```
