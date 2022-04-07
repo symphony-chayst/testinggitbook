@@ -211,12 +211,12 @@ paths:
           in: header
           required: true
           type: string
-        - name: messageList
+        - name: body
           in: body
           required: true
           type: array
-          items:
-            $ref: '#/definitions/V4ImportedMessage'
+          schema:
+            $ref: '#/definitions/V4MessageImportList'
       tags:
         - Messages
       responses:
