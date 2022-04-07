@@ -214,9 +214,8 @@ paths:
         - name: body
           in: body
           required: false
-          type: array
-          items:
-            $ref: '#/definitions/V4ImportedMessage'
+          schema:
+            $ref: '#/definitions/V4MessageImportList'
       tags:
         - Messages
       responses:
