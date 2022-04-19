@@ -32,3 +32,10 @@
   * [Malware Scanner](api-reference/page-2/malware-scanner.md)
   * [Certificates](api-reference/page-2/certificates.md)
 * [Apps On Behalf Of (OBO)](api-reference/apps-on-behalf-of-obo.md)
+
+## Group 1
+
+* [Page 3](group-1/page-3/README.md)
+  * [Page 4](group-1/page-3/page-4/README.md)
+    * [Page 6](group-1/page-3/page-4/page-6.md)
+  * [Page 5](group-1/page-3/page-5.md)
