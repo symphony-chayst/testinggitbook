@@ -1,1 +1,3 @@
-# Agent API
+# Group example
+
+Here is the content
