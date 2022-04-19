@@ -1,7 +1,8 @@
 # Table of contents
 
 * [README](README.md)
-* [Datafeed](datafeed.md)
+* [Datafeed](datafeed/README.md)
+  * [Page 1](datafeed/page-1.md)
 * [System](system.md)
 * [Messages](messages.md)
 * [Attachments](attachments.md)
