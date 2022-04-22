@@ -1,2 +1,0 @@
-# DLP Dictionary & Policy Management
-
