@@ -693,14 +693,7 @@ paths:
               - messageId: ryoQ1
                 timestamp: 1534891105293
                 attachments:
-                  id: internalId
-                  name: Test
-                  size: 66
-                sid: id
-              - messageId: ryoQ1...
-                timestamp: 1534891105293
-                attachments:
-                  - id: internal_14568529...
+                  - id: internal_14568529
                     name: Test2.bmp
                     size: 66
                     images:
@@ -710,12 +703,12 @@ paths:
                   email: bot.user1@test3.symphony.com
                   username: bot.user1
                 stream:
-                  streamId: -aapqi...
+                  streamId: -aapqi
                   streamType: IM
                 userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
                 originalFormat: com.symphony.messageml.v2
                 sid: a4d08d18-0729-4b54-9c4568da
-              - messageId: wZhj...
+              - messageId: wZhj
                 timestamp: 1534891104893
                 user:
                   userId: 14568529068038
@@ -723,15 +716,15 @@ paths:
                   email: bot.user1@test3.symphony.com
                   username: bot.user1
                 stream:
-                  streamId: -aapqi...
+                  streamId: -aapqi
                   streamType: IM
                 userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
                 originalFormat: com.symphony.messageml.v2
                 sid: a4d08d18-0729-4b54-9c4568da
-                replacing: xavTou...
+                replacing: xavTou
                 initialTimestamp: 1534891104093
-                initialMessageId: -MIUK_ze...
-              - messageId: xavTou...
+                initialMessageId: -MIUK_ze
+              - messageId: xavTou
                 timestamp: 1534891104393
                 user:
                   userId: 14568529068038
@@ -739,16 +732,16 @@ paths:
                   email: bot.user1@test3.symphony.com
                   username: bot.user1
                 stream:
-                  streamId: -aapqi...
+                  streamId: -aapqi
                   streamType: IM
                 userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
                 originalFormat: com.symphony.messageml.v2
                 sid: a4d08d18-0729-4b54-9c4568da
-                replacing: -MIUK_ze...
-                replacedBy: wZhj...
+                replacing: -MIUK_ze
+                replacedBy: wZhj
                 initialTimestamp: 1534891104093
-                initialMessageId: -MIUK_ze...
-              - messageId: -MIUK_ze...
+                initialMessageId: -MIUK_ze
+              - messageId: -MIUK_ze
                 timestamp: 1534891104093
                 user:
                   userId: 14568529068038
@@ -756,12 +749,12 @@ paths:
                   email: bot.user1@test3.symphony.com
                   username: bot.user1
                 stream:
-                  streamId: -aapqi...
+                  streamId: -aapqi
                   streamType: IM
                 userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
                 originalFormat: com.symphony.messageml.v2
                 sid: a4d08d18-0729-4b54-9c4568da
-                replacedBy: xavTou...
+                replacedBy: xavTou
             With a shared Wall Post Message:
               - messageId: SsyKSnKaEwvGdx_OyDdkzH___pMrWImcdA
                 timestamp: 1566935840372
@@ -806,18 +799,10 @@ paths:
           description: 'Unauthorized: Session tokens invalid.'
           schema:
             $ref: '#/definitions/V2Error'
-          examples:
-            401 - Result:
-              code: 401
-              message: Invalid session
         '403':
           description: 'Forbidden: Caller lacks necessary entitlement.'
           schema:
             $ref: '#/definitions/V2Error'
-          examples:
-            403 - Result:
-              code: 403
-              message: The user lacks the required entitlement to perform this operation
         '500':
           description: 'Server error, see response body for further details.'
           schema:
