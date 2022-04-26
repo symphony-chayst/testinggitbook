@@ -637,6 +637,39 @@ paths:
           with the same timestamp value already seen as the skip parameter. This
           means that every message will be seen exactly once, even in the case where
           an additional message is processed with the same timestamp.
+          
+          This method is intended for historic queries and is generally reliable
+          but if guaranteed delivery of every message in real time is required
+          then the equivalent firehose method should be called.
+          
+          --
+          
+          Example with the Pagination usage:
+          - The skip parameter is supposed to be used to skip messages that have the same timestamp as the one specified on since.
+          - Pagination is supposed to use the since parameter instead of skip and limit.
+          
+          Examples:
+          If you want to get two messages at a time skipping the ones you have already seen, the calls should be the following:
+          1. First call
+          https://acme.symphony.com/agent/v4/stream/sid/message?since=0&limit=2
+          2. Second call
+          Let's assume here that the timestamp from the message returned on the first call was 1551052800000 and there was no other message with that same timestamp returned.
+          https://acme.symphony.com/agent/v4/stream/sid/message?since=1551052800000&limit=2&skip=1
+          
+          It returns the two messages received after or on the timestamp 1551052800000, skipping one message from that same timestamp (which is the one you have already seen).
+          Note that you can keep doing this process with subsequent calls.
+          
+          --
+          
+          Note that some attributes are returned in the payload only under specific conditions:
+          - ´sharedMessage´ only when the message represented by this class is a wall post sharing another message;
+          - ´initialMessageId´, ´initialTimestamp´, and ´replacing´ only when the corresponding message is sent as an update of another message thanks to Update Message endpoint. Note that the first two attributes contain information of the original (and therefore first) message sent, whereas the replacing attribute applies to the last updated message occurence id that is replaced;
+          - ´replacedBy´ only when the corresponding message has been updated by a new message which id is provisioned by this attribute.
+          
+          --
+          
+          Supported stream types:
+          In addition to conversation streams such as IM, MIM, Chat rooms and Wall posts, Symphony also supports other types of streams, some of them reserved for internal use. These other stream types (ACTION, POST, PRIVATE_CHANNEL, MEETING, SUPPRESS_JUSTIFICATION) are not supported by the Get Messages endpoint.
       produces:
         - application/json
       parameters:
@@ -691,7 +724,7 @@ paths:
                   size: 66
                 sid: id
               - messageId: ryoQ1...
-                timestamp": 1534891105293
+                timestamp: 1534891105293
                 message: <div data-format=\"PresentationML\" data-version=\"2.0\">Hello World</div>
                 data: {\"entityIdentifier\":{\"type\":\"org.symphonyoss.fin.security\",\"version\":\"0.1\",\"id\":[{\"type\":\"org.symphonyoss.fin.security.id.isin\",\"value\":\"US0378\"},{\"type\":\"org.symphonyoss.fin.security.id.cusip\",\"value\":\"037\"},{\"type\":\"org.symphonyoss.fin.security.id.openfigi\",\"value\":\"BBG000\"}]}}
                 attachments:
@@ -711,7 +744,7 @@ paths:
                 originalFormat: com.symphony.messageml.v2
                 sid: a4d08d18-0729-4b54-9c4568da
               - messageId: wZhj...
-                timestamp": 1534891104893
+                timestamp: 1534891104893
                 message: <div data-format=\"PresentationML\" data-version=\"2.0\">Final update</div>
                 user:
                   userId: 14568529068038
@@ -728,7 +761,7 @@ paths:
                 initialTimestamp: 1534891104093
                 initialMessageId: -MIUK_ze...
               - messageId: xavTou...
-                timestamp": 1534891104393
+                timestamp: 1534891104393
                 message: <div data-format=\"PresentationML\" data-version=\"2.0\">Update</div>
                 user:
                   userId: 14568529068038
@@ -746,7 +779,7 @@ paths:
                 initialTimestamp: 1534891104093
                 initialMessageId: -MIUK_ze...
               - messageId: -MIUK_ze...
-                timestamp": 1534891104093
+                timestamp: 1534891104093
                 message: <div data-format=\"PresentationML\" data-version=\"2.0\">Initial</div>
                 user:
                   userId: 14568529068038
