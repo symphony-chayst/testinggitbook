@@ -215,7 +215,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/definitions/V4MessageImportList'
+              $ref: '#/definitions/V4ImportedMessage'
       tags:
         - Messages
       responses:
