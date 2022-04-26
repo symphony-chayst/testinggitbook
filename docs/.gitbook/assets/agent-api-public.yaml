@@ -725,13 +725,11 @@ paths:
                 sid: id
               - messageId: ryoQ1...
                 timestamp: 1534891105293
-                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Hello World</div>
-                data: {\"entityIdentifier\":{\"type\":\"org.symphonyoss.fin.security\",\"version\":\"0.1\",\"id\":[{\"type\":\"org.symphonyoss.fin.security.id.isin\",\"value\":\"US0378\"},{\"type\":\"org.symphonyoss.fin.security.id.cusip\",\"value\":\"037\"},{\"type\":\"org.symphonyoss.fin.security.id.openfigi\",\"value\":\"BBG000\"}]}}
                 attachments:
                   - id: internal_14568529...
                     name: Test2.bmp
                     size: 66
-                    images: []
+                    images:
                 user:
                   userId: 14568529068038
                   displayName: Local Bot01
@@ -745,7 +743,6 @@ paths:
                 sid: a4d08d18-0729-4b54-9c4568da
               - messageId: wZhj...
                 timestamp: 1534891104893
-                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Final update</div>
                 user:
                   userId: 14568529068038
                   displayName: Local Bot01
@@ -762,7 +759,6 @@ paths:
                 initialMessageId: -MIUK_ze...
               - messageId: xavTou...
                 timestamp: 1534891104393
-                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Update</div>
                 user:
                   userId: 14568529068038
                   displayName: Local Bot01
@@ -780,7 +776,6 @@ paths:
                 initialMessageId: -MIUK_ze...
               - messageId: -MIUK_ze...
                 timestamp: 1534891104093
-                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Initial</div>
                 user:
                   userId: 14568529068038
                   displayName: Local Bot01
@@ -796,11 +791,9 @@ paths:
             With a shared Wall Post Message:
               - messageId: SsyKSnKaEwvGdx_OyDdkzH___pMrWImcdA
                 timestamp: 1566935840372
-                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Sharing the Wall Post Message 2</div>
                 sharedMessage:
                   messageId: cSXNLlLfBn6HylmnVPElcH___pMrWQyXdA
                   timestamp: 1566935806838
-                  message: <div data-format=\"PresentationML\" data-version=\"2.0\" class=\"wysiwyg\"><p>Wall Post Message 2</p></div>
                   data:
                   user:
                     userId: 7078106104167
