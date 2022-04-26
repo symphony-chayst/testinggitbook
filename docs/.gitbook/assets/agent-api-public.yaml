@@ -211,10 +211,6 @@ paths:
           in: header
           required: true
           type: string
-        - name: other
-          in: body
-          required: true
-          type: string
       requestBody:
         content:
           application/json:
