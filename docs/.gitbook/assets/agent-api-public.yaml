@@ -211,11 +211,11 @@ paths:
           in: header
           required: true
           type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/definitions/V4ImportedMessage'
+        - name: body
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/V4MessageImportList'
       tags:
         - Messages
       responses:
