@@ -642,32 +642,6 @@ paths:
           but if guaranteed delivery of every message in real time is required
           then the equivalent firehose method should be called.
           
-          --
-          
-          Example with the Pagination usage:
-          - The skip parameter is supposed to be used to skip messages that have the same timestamp as the one specified on since.
-          - Pagination is supposed to use the since parameter instead of skip and limit.
-          
-          Examples:
-          If you want to get two messages at a time skipping the ones you have already seen, the calls should be the following:
-          1. First call
-          https://acme.symphony.com/agent/v4/stream/sid/message?since=0&limit=2
-          2. Second call
-          Let's assume here that the timestamp from the message returned on the first call was 1551052800000 and there was no other message with that same timestamp returned.
-          https://acme.symphony.com/agent/v4/stream/sid/message?since=1551052800000&limit=2&skip=1
-          
-          It returns the two messages received after or on the timestamp 1551052800000, skipping one message from that same timestamp (which is the one you have already seen).
-          Note that you can keep doing this process with subsequent calls.
-          
-          --
-          
-          Note that some attributes are returned in the payload only under specific conditions:
-          - ´sharedMessage´ only when the message represented by this class is a wall post sharing another message;
-          - ´initialMessageId´, ´initialTimestamp´, and ´replacing´ only when the corresponding message is sent as an update of another message thanks to Update Message endpoint. Note that the first two attributes contain information of the original (and therefore first) message sent, whereas the replacing attribute applies to the last updated message occurence id that is replaced;
-          - ´replacedBy´ only when the corresponding message has been updated by a new message which id is provisioned by this attribute.
-          
-          --
-          
           Supported stream types:
           In addition to conversation streams such as IM, MIM, Chat rooms and Wall posts, Symphony also supports other types of streams, some of them reserved for internal use. These other stream types (ACTION, POST, PRIVATE_CHANNEL, MEETING, SUPPRESS_JUSTIFICATION) are not supported by the Get Messages endpoint.
       produces:
