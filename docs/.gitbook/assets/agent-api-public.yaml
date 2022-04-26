@@ -628,56 +628,82 @@ paths:
             $ref: '#/definitions/Error'
   '/v4/stream/{sid}/message':
     get:
-      summary: Get messages from an existing stream.
+      summary: Get messages from an existing stream (IM, MIM, chatroom, wall post).
+      Additionally returns any attachments associated with the message.
+      Available on Agent 2.53.0 and above.
       description: |
-          A caller can fetch all unseen messages by passing the timestamp of
+          Via this API, the caller can fetch all unseen messages by passing the timestamp of
           the last message seen as the since parameter and the number of messages
           with the same timestamp value already seen as the skip parameter. This
-          means that every message will be seen exactly once even in the case that
-          an additional message is processed with the same timestamp as the last
-          message returned by the previous call, and the case where there are
-          more than maxMessages with the same timestamp value.
+          means that every message will be seen exactly once, even in the case where
+          an additional message is processed with the same timestamp.
 
           This method is intended for historic queries and is generally reliable
           but if guaranteed delivery of every message in real time is required
-          then the equivilent firehose method should be called.
+          then the equivalent firehose method should be called.
+          
+          --
+          
+          Example with the Pagination usage:
+          • The skip parameter is supposed to be used to skip messages that have the same timestamp as the one specified on since.
+          • Pagination is supposed to use the since parameter instead of skip and limit.
+          
+          Examples:
+          If you want to get two messages at a time skipping the ones you have already seen, the calls should be the following:
+          1. First call
+          https://acme.symphony.com/agent/v4/stream/sid/message?since=0&limit=2
+          2. Second call
+          Let's assume here that the timestamp from the message returned on the first call was 1551052800000 and there was no other message with that same timestamp returned.
+          https://acme.symphony.com/agent/v4/stream/sid/message?since=1551052800000&limit=2&skip=1
+          
+          It returns the two messages received after or on the timestamp 1551052800000, skipping one message from that same timestamp (which is the one you have already seen).
+          Note that you can keep doing this process with subsequent calls.
+          
+          --
+          
+          Note that some attributes are returned in the payload only under specific conditions:
+          - ´sharedMessage´ only when the message represented by this class is a wall post sharing another message;
+          - ´initialMessageId´, ´initialTimestamp´, and ´replacing´ only when the corresponding message is sent as an update of another message thanks to Update Message endpoint. Note that the first two attributes contain information of the original (and therefore first) message sent, whereas the replacing attribute applies to the last updated message occurence id that is replaced;
+          - ´replacedBy´ only when the corresponding message has been updated by a new message which id is provisioned by this attribute.
+          
+          --
+          
+          Supported stream types:
+          In addition to conversation streams such as IM, MIM, Chat rooms and Wall posts, Symphony also supports other types of streams, some of them reserved for internal use. These other stream types (ACTION, POST, PRIVATE_CHANNEL, MEETING, SUPPRESS_JUSTIFICATION) are not supported by the Get Messages endpoint.
       produces:
         - application/json
       parameters:
         - name: sid
           description: |
-            Stream ID
+            Stream ID, i.e. the Conversation ID of the IM, MIM, chatroom or wall post from which messages should be returned.
           in: path
           required: true
           type: string
         - name: since
           description: |
-            Timestamp of first required message.
-
-            This is a long integer value representing milliseconds since
-            Jan 1 1970
+            Timestamp of the earliest possible date of the first message returned. A long integer value representing milliseconds since January 1, 1970.
           in: query
           required: true
           type: integer
           format: int64
         - name: skip
           description: |
-            No. of messages to skip.
+            Number of messages to skip.
           in: query
           type: integer
         - name: limit
           description: |
-            Max No. of messages to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+            Maximum number of messages to return. If not specified, the default limit will be 50.
           in: query
           type: integer
           required: false
         - name: sessionToken
-          description: Session authentication token.
+          description: Session token obtained from Session Authenticate endpoint.
           in: header
           required: true
           type: string
         - name: keyManagerToken
-          description: Key Manager authentication token.
+          description: Key manager token obtained from Key Manager Authenticate endpoint.
           in: header
           required: true
           type: string
@@ -688,24 +714,153 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/V4MessageList'
+          examples:
+            OK:
+              - messageId: ryoQ1
+                timestamp: 1534891105293
+                attachments:
+                  id: internalId
+                  name: Test
+                  size: 66
+                sid: id
+              - messageId: ryoQ1...
+                timestamp": 1534891105293
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Hello World</div>
+                data: {\"entityIdentifier\":{\"type\":\"org.symphonyoss.fin.security\",\"version\":\"0.1\",\"id\":[{\"type\":\"org.symphonyoss.fin.security.id.isin\",\"value\":\"US0378\"},{\"type\":\"org.symphonyoss.fin.security.id.cusip\",\"value\":\"037\"},{\"type\":\"org.symphonyoss.fin.security.id.openfigi\",\"value\":\"BBG000\"}]}}
+                attachments:
+                  - id: internal_14568529...
+                    name: Test2.bmp
+                    size: 66
+                    images: []
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+              - messageId: wZhj...
+                timestamp": 1534891104893
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Final update</div>
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+                replacing: xavTou...
+                initialTimestamp: 1534891104093
+                initialMessageId: -MIUK_ze...
+              - messageId: xavTou...
+                timestamp": 1534891104393
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Update</div>
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+                replacing: -MIUK_ze...
+                replacedBy: wZhj...
+                initialTimestamp: 1534891104093
+                initialMessageId: -MIUK_ze...
+              - messageId: -MIUK_ze...
+                timestamp": 1534891104093
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Initial</div>
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+                replacedBy: xavTou...
+            With a shared Wall Post Message:
+              - messageId: SsyKSnKaEwvGdx_OyDdkzH___pMrWImcdA
+                timestamp: 1566935840372
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Sharing the Wall Post Message 2</div>
+                sharedMessage:
+                  messageId: cSXNLlLfBn6HylmnVPElcH___pMrWQyXdA
+                  timestamp: 1566935806838
+                  message: <div data-format=\"PresentationML\" data-version=\"2.0\" class=\"wysiwyg\"><p>Wall Post Message 2</p></div>
+                  data:
+                  user:
+                    userId: 7078106104167
+                    firstName: User
+                    lastName: Admin
+                    displayName: User Admin
+                    email: user_admin@symphony.com
+                    username: user_admin
+                  stream:
+                    streamId: CwCfeJlwVxxw6Ponx3vgqH___rEj7-amdA
+                    streamType: POST
+                  userAgent: DESKTOP-40.0.0-11381-Windows-10-Chrome-76.0.3809.100
+                  originalFormat: com.symphony.messageml.v2
+                  sid: a4d08d18-0729-4b54-9c4568da
+                data:
+                user:
+                  userId: 7078106482890
+                  firstName: John
+                  lastName: Doe
+                  displayName: John Doe
+                  email: john_doe@symphony.com
+                  username: john_doe
+                stream:
+                  streamId: 19WbnzI3pYh4kdRxN7k8m3___pY7bXBRdA
+                  streamType: POST
+                userAgent: DESKTOP-40.0.0-11381-Windows-10-Chrome-76.0.3809.100
+                originalFormat: com.symphony.markdown
+                sid: a4d08d18-0729-4b54-9c4568da
         '204':
           description: No Messages.
         '400':
           description: 'Client error, see response body for further details.'
           schema:
             $ref: '#/definitions/V2Error'
+          examples:
+            400 - Result:
+              //Bad request. See response body for further details.
         '401':
           description: 'Unauthorized: Session tokens invalid.'
           schema:
             $ref: '#/definitions/V2Error'
+          examples:
+            401 - Result:
+              code: 401
+              message: Invalid session
         '403':
           description: 'Forbidden: Caller lacks necessary entitlement.'
           schema:
             $ref: '#/definitions/V2Error'
+          examples:
+            403 - Result:
+              code: 403
+              message: The user lacks the required entitlement to perform this operation
         '500':
           description: 'Server error, see response body for further details.'
           schema:
             $ref: '#/definitions/V2Error'
+          examples:
+            500 - Result:
+              //Server error, see response body for further details.
   '/v4/stream/{sid}/message/create':
     post:
       summary: Post a message to one existing stream.
