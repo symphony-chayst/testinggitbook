@@ -3698,6 +3698,9 @@ definitions:
     properties:
       id:
         type: string
+    examples:
+      200 - OK:
+        id: 8e4fsdlk
   RoomTag:
     description: Room Tag object. A key:value pair describing additional properties of the room.
     properties:
