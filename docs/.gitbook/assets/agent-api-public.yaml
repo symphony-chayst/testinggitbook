@@ -836,6 +836,9 @@ paths:
           description: 'Client error, see response body for further details.'
           schema:
             $ref: '#/definitions/V2Error'
+          examples:
+            500 - Result:
+              // Bad request. See response body for further details.
         '401':
           description: 'Unauthorized: Session tokens invalid.'
           schema:
