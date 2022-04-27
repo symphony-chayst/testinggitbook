@@ -629,8 +629,6 @@ paths:
   '/v4/stream/{sid}/message':
     get:
       summary: Get messages from an existing stream (IM, MIM, chatroom, wall post).
-      Additionally returns any attachments associated with the message.
-      Available on Agent 2.53.0 and above.
       description: |
           Via this API, the caller can fetch all unseen messages by passing the timestamp of
           the last message seen as the since parameter and the number of messages
