@@ -686,6 +686,121 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/V4MessageList'
+          examples:
+            OK:
+              - messageId: ryoQ1
+                timestamp: 1534891105293
+                attachments:
+                  id: internalId
+                  name: Test
+                  size: 66
+                sid: id
+              - messageId: ryoQ1...
+                timestamp: 1534891105293
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Hello World</div>
+                data: {\"entityIdentifier\":{\"type\":\"org.symphonyoss.fin.security\",\"version\":\"0.1\",\"id\":[{\"type\":\"org.symphonyoss.fin.security.id.isin\",\"value\":\"US0378\"},{\"type\":\"org.symphonyoss.fin.security.id.cusip\",\"value\":\"037\"},{\"type\":\"org.symphonyoss.fin.security.id.openfigi\",\"value\":\"BBG000\"}]}}
+                attachments:
+                  - id: internal_14568529...
+                    name: Test2.bmp
+                    size: 66
+                    images: []
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+              - messageId: wZhj...
+                timestamp: 1534891104893
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Final update</div>
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+                replacing: xavTou...
+                initialTimestamp: 1534891104093
+                initialMessageId: -MIUK_ze...
+              - messageId: xavTou...
+                timestamp: 1534891104393
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Update</div>
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+                replacing: -MIUK_ze...
+                replacedBy: wZhj...
+                initialTimestamp: 1534891104093
+                initialMessageId: -MIUK_ze...
+              - messageId: -MIUK_ze...
+                timestamp: 1534891104093
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Initial</div>
+                user:
+                  userId: 14568529068038
+                  displayName: Local Bot01
+                  email: bot.user1@test3.symphony.com
+                  username: bot.user1
+                stream:
+                  streamId: -aapqi...
+                  streamType: IM
+                userAgent: Agent-2.2.5-Linux-4.9.77-31.58.amzn1.x86_64
+                originalFormat: com.symphony.messageml.v2
+                sid: a4d08d18-0729-4b54-9c4568da
+                replacedBy: xavTou...
+            With a shared Wall Post Message:
+              - messageId: SsyKSnKaEwvGdx_OyDdkzH___pMrWImcdA
+                timestamp: 1566935840372
+                message: <div data-format=\"PresentationML\" data-version=\"2.0\">Sharing the Wall Post Message 2</div>
+                sharedMessage:
+                  messageId: cSXNLlLfBn6HylmnVPElcH___pMrWQyXdA
+                  timestamp: 1566935806838
+                  message: <div data-format=\"PresentationML\" data-version=\"2.0\" class=\"wysiwyg\"><p>Wall Post Message 2</p></div>
+                  data:
+                  user:
+                    userId: 7078106104167
+                    firstName: User
+                    lastName: Admin
+                    displayName: User Admin
+                    email: user_admin@symphony.com
+                    username: user_admin
+                  stream:
+                    streamId: CwCfeJlwVxxw6Ponx3vgqH___rEj7-amdA
+                    streamType: POST
+                  userAgent: DESKTOP-40.0.0-11381-Windows-10-Chrome-76.0.3809.100
+                  originalFormat: com.symphony.messageml.v2
+                  sid: a4d08d18-0729-4b54-9c4568da
+                data:
+                user:
+                  userId: 7078106482890
+                  firstName: John
+                  lastName: Doe
+                  displayName: John Doe
+                  email: john_doe@symphony.com
+                  username: john_doe
+                stream:
+                  streamId: 19WbnzI3pYh4kdRxN7k8m3___pY7bXBRdA
+                  streamType: POST
+                userAgent: DESKTOP-40.0.0-11381-Windows-10-Chrome-76.0.3809.100
+                originalFormat: com.symphony.markdown
+                sid: a4d08d18-0729-4b54-9c4568da
         '204':
           description: No Messages.
         '400':
