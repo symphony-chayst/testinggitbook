@@ -856,6 +856,9 @@ paths:
           description: 'Server error, see response body for further details.'
           schema:
             $ref: '#/definitions/V2Error'
+          examples:
+            500 - Result:
+              // Server error, see response body for further details.
   '/v4/stream/{sid}/message/create':
     post:
       summary: Post a message to one existing stream.
