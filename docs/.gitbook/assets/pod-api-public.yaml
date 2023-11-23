@@ -2536,9 +2536,8 @@ paths:
   '/v1/admin/messagesuppression/{id}/suppress':
     post:
       summary: Suppress a message
-      description: |
-        The following image shows how the UI represents a suppressed message.  
-The image on the left shows the original message before being suppressed. The image on the right shows how the message will be displayed after being suppressed.
+      description:
+        The following image shows how the UI represents a suppressed message. The image on the left shows the original message before being suppressed. The image on the right shows how the message will be displayed after being suppressed.
       consumes:
         - application/json
       produces:
