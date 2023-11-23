@@ -6,7 +6,7 @@
 
 
 
-{% swagger method="post" path="" baseUrl="https://YOUR-POD-SUBDOMAIN.symphony.com /relay/pubkey/authenticate" summary="" %}
+{% swagger method="post" path="" baseUrl="https://YOUR-POD-SUBDOMAIN.symphony.com /relay/pubkey/authenticate" summary="" expanded="true" %}
 {% swagger-description %}
 
 {% endswagger-description %}
