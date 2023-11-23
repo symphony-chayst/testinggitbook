@@ -4,7 +4,7 @@
 
 ## Endpoints Reference
 
-* [Test](endpoints-reference/test.md)
+* [Test](endpoints-reference/testingreadmeimport.md)
 * [Bots Authentication](endpoints-reference/bot-authentication/README.md)
   * [Session Authenticate](endpoints-reference/bot-authentication/rsa-session-authenticate.md)
   * [Key Manager Authenticate](endpoints-reference/bot-authentication/rsa-key-manager-authenticate.md)
